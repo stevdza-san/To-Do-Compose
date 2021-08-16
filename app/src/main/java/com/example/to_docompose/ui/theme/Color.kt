@@ -18,6 +18,14 @@ val MediumPriorityColor = Color(0xFFFFC114)
 val HighPriorityColor = Color(0XFFFF4646)
 val NonePriorityColor = Color(0xFFFFFFFF)
 
+val Colors.taskItemTextColor: Color
+    @Composable
+    get() = if (isLight) DarkGray else LightGray
+
+val Colors.taskItemBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Color.White else DarkGray
+
 val Colors.fabBackgroundColor: Color
     @Composable
     get() = if (isLight) Teal200 else Purple700
