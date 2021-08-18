@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">To-Do Compose</string>
 
+    <string name="back_arrow">Back Arrow</string>
+    <string name="add_task">Add Task</string>
     <string name="empty_content">No Tasks Found.</string>
     <string name="sad_face_icon">Sad Face Icon</string>
     <string name="close_icon">Close Icon</string>

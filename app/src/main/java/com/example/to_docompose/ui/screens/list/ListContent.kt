@@ -121,7 +121,7 @@ fun TaskItem(
 @ExperimentalMaterialApi
 @Composable
 @Preview
-fun TaskItemPreview() {
+private fun TaskItemPreview() {
     TaskItem(
         toDoTask = ToDoTask(
             id = 0,
