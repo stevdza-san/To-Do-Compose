@@ -58,7 +58,9 @@ fun ListAppBar(
                         SearchAppBarState.CLOSED
                     sharedViewModel.searchTextState.value = ""
                 },
-                onSearchClicked = {}
+                onSearchClicked = {
+                    sharedViewModel.searchDatabase(searchQuery = it)
+                }
             )
         }
     }
