@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">To-Do Compose</string>
 
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="drop_down_arrow">Drop-Down Arrow Icon</string>
