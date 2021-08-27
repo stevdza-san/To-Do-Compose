@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">To-Do Compose</string>
 
+    <string name="to_do_logo">To-Do Logo</string>
     <string name="delete_all_tasks">Remove All Tasks?</string>
     <string name="delete_all_tasks_confirmation">Are you sure you want to remove all Tasks? There is no going back after this action.</string>
     <string name="delete_task">Remove \'%1$s\'?</string>
