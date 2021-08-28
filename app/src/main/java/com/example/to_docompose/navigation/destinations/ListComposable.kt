@@ -5,7 +5,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.compose.navArgument
 import com.example.to_docompose.ui.screens.list.ListScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel

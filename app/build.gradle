@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.to_docompose"
@@ -65,7 +65,10 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha07")
+
+    // Accompanist Navigation Animation
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.17.0"
 
     // Room components
     implementation "androidx.room:room-runtime:2.3.0"
