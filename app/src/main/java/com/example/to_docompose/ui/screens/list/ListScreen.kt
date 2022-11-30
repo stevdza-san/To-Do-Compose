@@ -1,5 +1,6 @@
 package com.example.to_docompose.ui.screens.list
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,8 +13,8 @@ import com.example.to_docompose.ui.theme.fabBackgroundColor
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 import com.example.to_docompose.util.SearchAppBarState
-import kotlinx.coroutines.launch
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
@@ -104,20 +105,17 @@ fun DisplaySnackBar(
     taskTitle: String,
     action: Action
 ) {
-    val scope = rememberCoroutineScope()
     LaunchedEffect(key1 = action) {
         if (action != Action.NO_ACTION) {
-            scope.launch {
-                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
-                    message = setMessage(action = action, taskTitle = taskTitle),
-                    actionLabel = setActionLabel(action = action)
-                )
-                undoDeletedTask(
-                    action = action,
-                    snackBarResult = snackBarResult,
-                    onUndoClicked = onUndoClicked
-                )
-            }
+            val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
+                message = setMessage(action = action, taskTitle = taskTitle),
+                actionLabel = setActionLabel(action = action)
+            )
+            undoDeletedTask(
+                action = action,
+                snackBarResult = snackBarResult,
+                onUndoClicked = onUndoClicked
+            )
             onComplete(Action.NO_ACTION)
         }
     }
