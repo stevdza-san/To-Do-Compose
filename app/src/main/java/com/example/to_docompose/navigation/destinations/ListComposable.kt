@@ -9,6 +9,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
+import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.to_docompose.ui.screens.list.ListScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
@@ -16,7 +17,6 @@ import com.example.to_docompose.util.Action
 import com.example.to_docompose.util.Constants.LIST_ARGUMENT_KEY
 import com.example.to_docompose.util.Constants.LIST_SCREEN
 import com.example.to_docompose.util.toAction
-import com.google.accompanist.navigation.animation.composable
 
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi

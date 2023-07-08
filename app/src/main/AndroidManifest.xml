@@ -12,6 +12,7 @@
         android:theme="@style/Theme.ToDoCompose"
         tools:ignore="AllowBackup">
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.MySplash">
