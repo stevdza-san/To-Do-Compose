@@ -134,10 +134,8 @@ fun DisplayTasks(
             }
 
             val degrees by animateFloatAsState(
-                if (dismissState.targetValue == DismissValue.Default)
-                    0f
-                else
-                    -45f
+                if (dismissState.targetValue == DismissValue.Default) 0f else -45f,
+                label = "Degree animation"
             )
 
             var itemAppeared by remember { mutableStateOf(false) }
@@ -274,11 +272,3 @@ private fun RedBackgroundPreview() {
         RedBackground(degrees = 0f)
     }
 }
-
-
-
-
-
-
-
-
