@@ -1,16 +1,22 @@
 package com.example.to_docompose.ui.screens.task
 
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,8 +24,6 @@ import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.ToDoTask
-import com.example.to_docompose.ui.theme.topAppBarBackgroundColor
-import com.example.to_docompose.ui.theme.topAppBarContentColor
 import com.example.to_docompose.util.Action
 
 @Composable
@@ -37,6 +41,7 @@ fun TaskAppBar(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewTaskAppBar(
     navigateToListScreen: (Action) -> Unit
@@ -47,11 +52,13 @@ fun NewTaskAppBar(
         },
         title = {
             Text(
-                text = stringResource(id = R.string.add_task),
-                color = MaterialTheme.colors.topAppBarContentColor
+                color = MaterialTheme.colorScheme.onPrimary,
+                text = stringResource(id = R.string.add_task)
             )
         },
-        backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
         actions = {
             AddAction(onAddClicked = navigateToListScreen)
         }
@@ -66,7 +73,7 @@ fun BackAction(
         Icon(
             imageVector = Icons.Filled.ArrowBack,
             contentDescription = stringResource(id = R.string.back_arrow),
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
@@ -79,11 +86,12 @@ fun AddAction(
         Icon(
             imageVector = Icons.Filled.Check,
             contentDescription = stringResource(id = R.string.add_task),
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingTaskAppBar(
     selectedTask: ToDoTask,
@@ -95,13 +103,15 @@ fun ExistingTaskAppBar(
         },
         title = {
             Text(
+                color = MaterialTheme.colorScheme.onPrimary,
                 text = selectedTask.title,
-                color = MaterialTheme.colors.topAppBarContentColor,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         },
-        backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
         actions = {
             ExistingTaskAppBarActions(
                 selectedTask = selectedTask,
@@ -119,7 +129,7 @@ fun CloseAction(
         Icon(
             imageVector = Icons.Filled.Close,
             contentDescription = stringResource(id = R.string.close_icon),
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
@@ -157,7 +167,7 @@ fun DeleteAction(
         Icon(
             imageVector = Icons.Filled.Delete,
             contentDescription = stringResource(id = R.string.delete_icon),
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
@@ -170,7 +180,7 @@ fun UpdateAction(
         Icon(
             imageVector = Icons.Filled.Check,
             contentDescription = stringResource(id = R.string.update_icon),
-            tint = MaterialTheme.colors.topAppBarContentColor
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

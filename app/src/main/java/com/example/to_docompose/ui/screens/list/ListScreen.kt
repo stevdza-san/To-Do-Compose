@@ -2,21 +2,25 @@ package com.example.to_docompose.ui.screens.list
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.to_docompose.R
-import com.example.to_docompose.ui.theme.fabBackgroundColor
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 import com.example.to_docompose.util.SearchAppBarState
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalAnimationApi
-@ExperimentalMaterialApi
 @Composable
 fun ListScreen(
     action: Action,
@@ -36,10 +40,10 @@ fun ListScreen(
     val searchAppBarState: SearchAppBarState = sharedViewModel.searchAppBarState
     val searchTextState: String = sharedViewModel.searchTextState
 
-    val scaffoldState = rememberScaffoldState()
+    val snackBarHostState = remember { SnackbarHostState() }
 
     DisplaySnackBar(
-        scaffoldState = scaffoldState,
+        snackBarHostState = snackBarHostState,
         onComplete = { sharedViewModel.updateAction(newAction = it) },
         onUndoClicked = { sharedViewModel.updateAction(newAction = it) },
         taskTitle = sharedViewModel.title,
@@ -47,7 +51,7 @@ fun ListScreen(
     )
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
             ListAppBar(
                 sharedViewModel = sharedViewModel,
@@ -55,8 +59,12 @@ fun ListScreen(
                 searchTextState = searchTextState
             )
         },
-        content = {
+        content = { padding ->
             ListContent(
+                modifier = Modifier.padding(
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding()
+                ),
                 allTasks = allTasks,
                 searchedTasks = searchedTasks,
                 lowPriorityTasks = lowPriorityTasks,
@@ -66,7 +74,7 @@ fun ListScreen(
                 onSwipeToDelete = { action, task ->
                     sharedViewModel.updateAction(newAction = action)
                     sharedViewModel.updateTaskFields(selectedTask = task)
-                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                    snackBarHostState.currentSnackbarData?.dismiss()
                 },
                 navigateToTaskScreen = navigateToTaskScreen
             )
@@ -82,24 +90,20 @@ fun ListFab(
     onFabClicked: (taskId: Int) -> Unit
 ) {
     FloatingActionButton(
-        onClick = {
-            onFabClicked(-1)
-        },
-        backgroundColor = MaterialTheme.colors.fabBackgroundColor
+        onClick = { onFabClicked(-1) }
     ) {
         Icon(
             imageVector = Icons.Filled.Add,
             contentDescription = stringResource(
                 id = R.string.add_button
-            ),
-            tint = Color.White
+            )
         )
     }
 }
 
 @Composable
 fun DisplaySnackBar(
-    scaffoldState: ScaffoldState,
+    snackBarHostState: SnackbarHostState,
     onComplete: (Action) -> Unit,
     onUndoClicked: (Action) -> Unit,
     taskTitle: String,
@@ -107,7 +111,7 @@ fun DisplaySnackBar(
 ) {
     LaunchedEffect(key1 = action) {
         if (action != Action.NO_ACTION) {
-            val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
+            val snackBarResult = snackBarHostState.showSnackbar(
                 message = setMessage(action = action, taskTitle = taskTitle),
                 actionLabel = setActionLabel(action = action)
             )
